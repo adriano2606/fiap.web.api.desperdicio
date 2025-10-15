@@ -22,4 +22,4 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Fiap.Web.Api.Desperdicio.dll"]
-```eof
+
