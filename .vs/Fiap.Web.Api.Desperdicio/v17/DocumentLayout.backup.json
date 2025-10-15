@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Adriano\\Desktop\\Fiap.Web.Api.Desperdicio\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B4A90B81-A958-4CCC-B142-0B3A14AE6ED4}|Fiap.Web.Api.Desperdicio.csproj|c:\\users\\adriano\\desktop\\fiap.web.api.desperdicio\\ci-cd.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{B4A90B81-A958-4CCC-B142-0B3A14AE6ED4}|Fiap.Web.Api.Desperdicio.csproj|solutionrelative:ci-cd.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ci-cd.yml",
+              "DocumentMoniker": "C:\\Users\\Adriano\\Desktop\\Fiap.Web.Api.Desperdicio\\ci-cd.yml",
+              "RelativeDocumentMoniker": "ci-cd.yml",
+              "ToolTip": "C:\\Users\\Adriano\\Desktop\\Fiap.Web.Api.Desperdicio\\ci-cd.yml",
+              "RelativeToolTip": "ci-cd.yml",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAIwGkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2025-10-14T23:11:56.337Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
