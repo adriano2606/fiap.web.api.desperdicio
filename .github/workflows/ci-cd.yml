@@ -7,7 +7,6 @@ on:
       - staging
 
 env:
-  PROJECT_NAME: Fiap.Web.Api.Desperdicio 
   DOCKER_IMAGE_NAME: api-desperdicio-esg 
   DOTNET_VERSION: 8.0.x
   REGISTRY: ghcr.io 
@@ -37,7 +36,9 @@ jobs:
       - name: 🏷️ Definir Tag da Imagem
         id: set_tag
         run: |
-          echo "TAG=${REGISTRY}/${{ github.repository }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}" >> $GITHUB_OUTPUT
+          REPOSITORY_LOWERCASE=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE_TAG="${{ env.REGISTRY }}/$REPOSITORY_LOWERCASE/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}"
+          echo "TAG=$IMAGE_TAG" >> $GITHUB_OUTPUT
         
       - name: 🔑 Logar no GitHub Container Registry (GHCR)
         uses: docker/login-action@v3
