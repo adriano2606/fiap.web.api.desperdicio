@@ -1,8 +1,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-
 COPY Fiap.Web.Api.Desperdicio.sln .
+
+RUN mkdir Fiap.Web.Api.Desperdicio
+RUN mkdir Fiap.Web.Api.Desperdicio.Tests
+
 
 COPY Fiap.Web.Api.Desperdicio/*.csproj Fiap.Web.Api.Desperdicio/
 COPY Fiap.Web.Api.Desperdicio.Tests/*.csproj Fiap.Web.Api.Desperdicio.Tests/
