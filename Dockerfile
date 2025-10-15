@@ -3,23 +3,19 @@ WORKDIR /src
 
 COPY Fiap.Web.Api.Desperdicio.sln .
 
-RUN mkdir Fiap.Web.Api.Desperdicio
-RUN mkdir Fiap.Web.Api.Desperdicio.Tests
-
-
-COPY Fiap.Web.Api.Desperdicio/*.csproj Fiap.Web.Api.Desperdicio/
-COPY Fiap.Web.Api.Desperdicio.Tests/*.csproj Fiap.Web.Api.Desperdicio.Tests/
+COPY Fiap.Web.Api.Desperdicio/ Fiap.Web.Api.Desperdicio/
+COPY Fiap.Web.Api.Desperdicio.Tests/ Fiap.Web.Api.Desperdicio.Tests/
 
 
 RUN dotnet restore "Fiap.Web.Api.Desperdicio.sln"
 
 COPY . .
 
-RUN dotnet build "Fiap.Web.Api.Desperdicio.csproj" -c Release -o /app/build
+RUN dotnet build "Fiap.Web.Api.Desperdicio/Fiap.Web.Api.Desperdicio.csproj" -c Release -o /app/build
 
 FROM build AS publish
 
-RUN dotnet publish "Fiap.Web.Api.Desperdicio.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Fiap.Web.Api.Desperdicio/Fiap.Web.Api.Desperdicio.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
