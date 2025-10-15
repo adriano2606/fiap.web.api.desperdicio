@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Fiap.Web.Api.Desperdicio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dbd3ea5560df7394365a51b42e0bb3b827814d76")]
 [assembly: System.Reflection.AssemblyProductAttribute("Fiap.Web.Api.Desperdicio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Fiap.Web.Api.Desperdicio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
