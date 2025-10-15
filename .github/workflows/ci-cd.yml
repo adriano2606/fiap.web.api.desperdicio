@@ -1,0 +1,110 @@
+name: CI/CD ESG API - Desperdício
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+
+env:
+  DOCKER_IMAGE_NAME: api-desperdicio-esg 
+  DOTNET_VERSION: 8.0.x
+  REGISTRY: ghcr.io 
+
+
+jobs:
+
+  build_and_test:
+    name: Build, Teste e Criação da Imagem
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write 
+    
+    outputs:
+      image_tag: ${{ steps.set_tag.outputs.TAG }}
+
+    steps:
+      - name: 🔄 Checkout do Código
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Configurar .NET Core ${{ env.DOTNET_VERSION }}
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+          
+      - name: 🔍 Rodar Testes Unitários
+        run: dotnet test --verbosity normal
+
+      - name: 🏷️ Definir Tag da Imagem
+        id: set_tag
+        run: |
+          REPOSITORY_LOWERCASE=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE_TAG="${{ env.REGISTRY }}/$REPOSITORY_LOWERCASE/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}"
+          echo "TAG=$IMAGE_TAG" >> $GITHUB_OUTPUT
+        
+      - name: 🔑 Logar no GitHub Container Registry (GHCR)
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🛠️ Build da Imagem Docker
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.set_tag.outputs.TAG }}
+          labels: ${{ github.ref_name }}
+
+      - name: ✨ Imagem Construída e Enviada (CORRIGIDO com Bloco Literal)
+        run: |
+          echo "Imagem gerada: ${{ steps.set_tag.outputs.TAG }}" 
+
+
+  deploy_staging:
+    name: Deploy em Staging
+    runs-on: ubuntu-latest
+    needs: build_and_test
+    if: github.ref == 'refs/heads/staging'
+
+    steps:
+      - name: 📝 Log do Deploy em Staging
+        run: |
+          echo "Iniciando Deploy da imagem para Staging:"
+          echo "Imagem: ${{ needs.build_and_test.outputs.image_tag }}"
+          
+      - name: 🚀 Executar Comando de Deploy (SIMULAÇÃO)
+        run: |
+          echo "Simulando deploy para o ambiente de Staging (Exemplo: Azure App Service/VM):"
+          echo "Aqui você usaria seu comando de deploy, ex: ssh user@staging-server 'docker pull ${{ needs.build_and_test.outputs.image_tag }} && docker restart api-desperdicio'"
+
+      - name: 🟢 Staging OK (CORRIGIDO com Bloco Literal)
+        run: |
+          echo "Deploy em Staging concluído com sucesso."
+
+
+  deploy_prod:
+    name: Deploy em Produção
+    runs-on: ubuntu-latest
+    needs: deploy_staging
+    if: github.ref == 'refs/heads/main'
+
+
+    steps:
+      - name: 📝 Log do Deploy em Produção
+        run: |
+          echo "Iniciando Deploy da imagem para Produção:"
+          echo "Imagem: ${{ needs.build_and_test.outputs.image_tag }}"
+          
+      - name: 🚀 Executar Comando de Deploy (SIMULAÇÃO)
+        run: |
+          echo "Simulando deploy para o ambiente de Produção (Exemplo: Azure App Service/VM):"
+          echo "Aqui você usaria seu comando de deploy, ex: ssh user@prod-server 'docker pull ${{ needs.build_and_test.outputs.image_tag }} && docker restart api-desperdicio'"
+
+      - name: 💚 Produção OK (CORRIGIDO com Bloco Literal)
+        run: |
+          echo "Deploy em Produção concluído com sucesso."
