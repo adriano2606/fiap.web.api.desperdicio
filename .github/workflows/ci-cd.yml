@@ -17,6 +17,10 @@ jobs:
   build_and_test:
     name: Build, Teste e Criação da Imagem
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write 
     
     outputs:
       image_tag: ${{ steps.set_tag.outputs.TAG }}
